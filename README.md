@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/Edwin-Luijten/go_command_bus.svg?branch=master)](https://travis-ci.com/Edwin-Luijten/go_command_bus)  
 
 ## Installation
-``` go get github.com/edwin-luijten/go-command-bus@v0.0 ```
+``` go get github.com/edwin-luijten/go_command_bus@v0.0 ```
 
 ## Usage
 
