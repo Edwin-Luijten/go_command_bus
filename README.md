@@ -1,5 +1,7 @@
 # A Command Bus for GO
 
+[![Build Status](https://travis-ci.com/Edwin-Luijten/go_command_bus.svg?branch=master)](https://travis-ci.com/Edwin-Luijten/go_command_bus)  
+
 ## Installation
 ``` go get github.com/edwin-luijten/go-command-bus@v0.0 ```
 
