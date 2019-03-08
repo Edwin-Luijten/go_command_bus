@@ -2,6 +2,7 @@ sudo: false
 language: go
 
 env:
+  - CC_TEST_REPORTER_ID=cd7152cbbcefcfa08ee114b2818da8c0e6e34751a9322f48ece4b742e6fa892a
   - GO111MODULE=on
 
 go:
@@ -17,10 +18,12 @@ install:
   - cd $GOPATH/src/github.com/codeclimate/test-reporter && git checkout tags/v1.0.1 && go install
 
 before_script:
-  - test-reporter before-build
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - go test -coverprofile c.out -race
 
 after_script:
-  - test-reporter after-build --coverage-input-type gocov --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
