@@ -1,6 +1,8 @@
 # A Command Bus for GO
 
-[![Build Status](https://travis-ci.com/Edwin-Luijten/go_command_bus.svg?branch=master)](https://travis-ci.com/Edwin-Luijten/go_command_bus)  
+[![Build Status](https://travis-ci.com/Edwin-Luijten/go_command_bus.svg?branch=master)](https://travis-ci.com/Edwin-Luijten/go_command_bus) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/ff5d37cbc59ef9a174a5/maintainability)](https://codeclimate.com/github/Edwin-Luijten/go_command_bus/maintainability) 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ff5d37cbc59ef9a174a5/test_coverage)](https://codeclimate.com/github/Edwin-Luijten/go_command_bus/test_coverage)
 
 ## Installation
 ``` go get github.com/edwin-luijten/go_command_bus ```
