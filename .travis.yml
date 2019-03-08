@@ -13,10 +13,6 @@ go:
 git:
   depth: 1
 
-install:
-  - go get -v github.com/codeclimate/test-reporter
-  - cd $GOPATH/src/github.com/codeclimate/test-reporter && git checkout tags/v1.0.1 && go install
-
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
