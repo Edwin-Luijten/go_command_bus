@@ -12,7 +12,15 @@ go:
 git:
   depth: 1
 
-install: true
+install:
+  - go get -v github.com/codeclimate/test-reporter
+  - cd $GOPATH/src/github.com/codeclimate/test-reporter && git checkout tags/v1.0.1 && go install
+
+before_script:
+  - test-reporter before-build
 
 script:
-  - go test -v -race
+  - go test -coverprofile c.out -race
+
+after_script:
+  - test-reporter after-build --coverage-input-type gocov --exit-code $TRAVIS_TEST_RESULT
