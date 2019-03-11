@@ -1,4 +1,4 @@
-package go_command_bus
+package commandbus
 
 type sortByPriority []middleware
 

@@ -1,4 +1,5 @@
-package go_command_bus
+// Package commandbus provides an easy way to implement the command bus pattern.
+package commandbus
 
 import (
 	"reflect"
@@ -6,7 +7,9 @@ import (
 	"sync"
 )
 
+// HandlerFunc provides command handler logic
 type HandlerFunc func(command interface{})
+
 type middlewareFunc func(command interface{}, next HandlerFunc)
 
 type middleware struct {
@@ -14,19 +17,24 @@ type middleware struct {
 	priority int
 }
 
+// CommandBus ...
 type CommandBus struct {
 	lock        *sync.Mutex
 	handlers    map[reflect.Type]HandlerFunc
 	middlewares []middleware
 }
 
+// New creates a new instance that returns a CommandBus
 func New() *CommandBus {
 	return &CommandBus{
+		lock:        &sync.Mutex{},
 		handlers:    make(map[reflect.Type]HandlerFunc),
 		middlewares: make([]middleware, 0),
 	}
 }
 
+
+// RegisterHandler allows you to register a command and it's handler.
 func (b *CommandBus) RegisterHandler(command interface{}, handler HandlerFunc) {
 	b.lock.Lock()
 
@@ -35,6 +43,9 @@ func (b *CommandBus) RegisterHandler(command interface{}, handler HandlerFunc) {
 	b.handlers[reflect.TypeOf(command)] = handler
 }
 
+
+// RegisterMiddleware allows you to register middleware's.
+// Use the priority argument to control the order of execution.
 func (b *CommandBus) RegisterMiddleware(function middlewareFunc, priority int) {
 	b.lock.Lock()
 
@@ -45,6 +56,7 @@ func (b *CommandBus) RegisterMiddleware(function middlewareFunc, priority int) {
 	sort.Sort(sortByPriority(b.middlewares))
 }
 
+// Handle allows you to trigger a command.
 func (b CommandBus) Handle(command interface{}) {
 	b.lock.Lock()
 
@@ -53,6 +65,7 @@ func (b CommandBus) Handle(command interface{}) {
 	b.getNext(0)(command)
 }
 
+// GetHandler returns the command handler that is registered to a given command.
 func (b CommandBus) GetHandler(command interface{}) HandlerFunc {
 	handler, _ := b.handlers[reflect.TypeOf(command)]
 
