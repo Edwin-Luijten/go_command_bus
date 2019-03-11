@@ -15,7 +15,7 @@ type middleware struct {
 }
 
 type CommandBus struct {
-	lock        sync.Mutex
+	lock        *sync.Mutex
 	handlers    map[reflect.Type]HandlerFunc
 	middlewares []middleware
 }
