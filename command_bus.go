@@ -33,7 +33,6 @@ func New() *CommandBus {
 	}
 }
 
-
 // RegisterHandler allows you to register a command and it's handler.
 func (b *CommandBus) RegisterHandler(command interface{}, handler HandlerFunc) {
 	b.lock.Lock()
@@ -42,7 +41,6 @@ func (b *CommandBus) RegisterHandler(command interface{}, handler HandlerFunc) {
 
 	b.handlers[reflect.TypeOf(command)] = handler
 }
-
 
 // RegisterMiddleware allows you to register middleware's.
 // Use the priority argument to control the order of execution.
