@@ -2,13 +2,52 @@ package commandbus
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 )
 
-type Command1 struct{
+type Command1 struct {
 	Message string
 }
 type Command2 struct{}
+
+func ExampleCommandBus_Commands() {
+	bus := New()
+
+	bus.RegisterHandler(&Command1{}, func(command interface{}) {
+		cmd := command.(*Command1)
+
+		fmt.Println(cmd.Message)
+	})
+
+	bus.Handle(&Command1{
+		Message: "yay",
+	})
+}
+
+func ExampleCommandBus_Middlewares() {
+	bus := New()
+
+	bus.RegisterHandler(&Command1{}, func(command interface{}) {
+		cmd := command.(*Command1)
+
+		fmt.Println(cmd.Message)
+		// Output: no
+	})
+
+	bus.RegisterMiddleware(func(command interface{}, next HandlerFunc) {
+		switch command.(type) {
+		case Command1:
+			command.(*Command1).Message = "no"
+		}
+
+		next(command)
+	}, 1)
+
+	bus.Handle(&Command1{
+		Message: "yay",
+	})
+}
 
 func TestGetRegisteredHandler(t *testing.T) {
 	bus := New()
