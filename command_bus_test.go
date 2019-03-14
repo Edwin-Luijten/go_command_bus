@@ -18,12 +18,13 @@ func ExampleCommandBus_RegisterHandler() {
 		cmd := command.(*Command1)
 
 		fmt.Println(cmd.Message)
-		// Output: yay
 	})
 
 	bus.Handle(&Command1{
 		Message: "yay",
 	})
+
+	// Output: yay
 }
 
 func ExampleCommandBus_RegisterMiddleware() {
@@ -33,7 +34,6 @@ func ExampleCommandBus_RegisterMiddleware() {
 		cmd := command.(*Command1)
 
 		fmt.Println(cmd.Message)
-		// Output: no
 	})
 
 	bus.RegisterMiddleware(func(command interface{}, next HandlerFunc) {
@@ -48,6 +48,8 @@ func ExampleCommandBus_RegisterMiddleware() {
 	bus.Handle(&Command1{
 		Message: "yay",
 	})
+
+	// Output: no
 }
 
 func TestGetRegisteredHandler(t *testing.T) {
