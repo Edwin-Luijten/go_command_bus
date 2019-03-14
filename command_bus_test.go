@@ -11,7 +11,7 @@ type Command1 struct {
 }
 type Command2 struct{}
 
-func ExampleCommandBus_Commands() {
+func ExampleCommandBus_RegisterHandler() {
 	bus := New()
 
 	bus.RegisterHandler(&Command1{}, func(command interface{}) {
@@ -26,7 +26,7 @@ func ExampleCommandBus_Commands() {
 	})
 }
 
-func ExampleCommandBus_Middlewares() {
+func ExampleCommandBus_RegisterMiddleware() {
 	bus := New()
 
 	bus.RegisterHandler(&Command1{}, func(command interface{}) {
