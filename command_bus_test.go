@@ -18,6 +18,7 @@ func ExampleCommandBus_Commands() {
 		cmd := command.(*Command1)
 
 		fmt.Println(cmd.Message)
+		// Output: yay
 	})
 
 	bus.Handle(&Command1{
