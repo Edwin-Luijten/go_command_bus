@@ -38,7 +38,7 @@ func ExampleCommandBus_RegisterMiddleware() {
 
 	bus.RegisterMiddleware(func(command interface{}, next HandlerFunc) {
 		switch command.(type) {
-		case Command1:
+		case *Command1:
 			command.(*Command1).Message = "no"
 		}
 
