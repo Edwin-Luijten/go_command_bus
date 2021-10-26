@@ -2,11 +2,7 @@ os: linux
 dist: bionic
 language: go
 
-env:
-  - GO111MODULE=on
-
 go:
-  - 1.11.x
   - 1.16.x
   - master
 
@@ -22,4 +18,4 @@ script:
   - go test -coverprofile c.out -race
 
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -p $(go list -m)
