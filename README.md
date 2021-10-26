@@ -34,6 +34,8 @@ func main() {
 
 ### Middleware's
 
+A middleware has a handler and a priority.  
+Where priority of 0 is the least amount of priority.  
 ```go
 import (
     commandbus "github.com/edwin-luijten/go_command_bus"
