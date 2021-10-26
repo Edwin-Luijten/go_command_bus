@@ -1,3 +1,3 @@
 module github.com/edwin-luijten/go_command_bus
 
-go 1.12
+go 1.16
