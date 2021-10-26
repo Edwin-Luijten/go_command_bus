@@ -18,5 +18,4 @@ script:
   - go test -coverprofile c.out -race
 
 after_script:
-  - export PREFIX=$(basename $(go list -m))
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -p $PREFIX
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -p $(go list -m)
